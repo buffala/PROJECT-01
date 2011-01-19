@@ -1,0 +1,41 @@
+Options -Indexes +FollowSymLinks
+SetEnv TZ America/Detroit
+DirectoryIndex index.php index.htm index.html
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  <IfModule mod_php5.c>
+    # All PHP changes made here can only
+    # be changed via .htaccess or edits to php.ini
+    php_value magic_quotes_gpc Off
+    php_value short_open_tag On
+    php_value expose_php Off
+    php_value error_log ./../logs/php.log
+    php_value upload_max_filesize 0M    
+  </IfModule>
+</IfModule>
+
+
+<IfModule mod_headers.c>
+  Header unset ETag
+  FileETag None
+
+  <IfModule mod_expires.c>
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|avi)$">
+      ExpiresActive On
+      ExpiresDefault "access plus 5 days"
+    </FilesMatch>
+  </IfModule>
+</IfModule>
+
+
+<IfModule mod_deflate.c>
+ AddOutputFilterByType DEFLATE text/html
+ AddOutputFilterByType DEFLATE text/css
+ AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+
+
